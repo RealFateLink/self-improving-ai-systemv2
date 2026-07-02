@@ -1,0 +1,43 @@
+name: self_improvement_proposal
+description: Proposes system self-improvement modifications
+version: '1.0'
+model_tier: powerful
+variables:
+- name: performance_data
+  type: string
+  required: true
+  description: Current performance data
+- name: weakness_analysis
+  type: string
+  required: true
+  description: Identified weaknesses
+- name: self_model
+  type: string
+  required: true
+  description: System's self-model
+system_prompt: You are a self-improvement module. Based on the system's self-assessment, propose specific, targeted improvements.
+  Each proposal must include a clear benefit, risk assessment, and implementation plan. Be conservative — propose only high-confidence
+  improvements.
+user_prompt: 'Propose self-improvements:
+
+
+  Performance Data:
+
+  {performance_data}
+
+
+  Weakness Analysis:
+
+  {weakness_analysis}
+
+
+  Self Model:
+
+  {self_model}
+
+
+  Provide: improvement proposals (max 3), each with title, description, expected benefit, risk assessment, and implementation
+  plan.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

@@ -1,0 +1,41 @@
+name: agent_proposal_generator
+description: Proposes creation of new specialized agents
+version: '1.0'
+model_tier: balanced
+variables:
+- name: performance_gaps
+  type: string
+  required: true
+  description: Identified performance gaps by domain
+- name: existing_agents
+  type: string
+  required: true
+  description: Currently active agents and their specialties
+- name: task_distribution
+  type: string
+  required: true
+  description: Distribution of task types
+system_prompt: You are an agent design module. Based on performance gaps and task distribution, propose new specialized agents.
+  Consider overlap with existing agents and cost of training.
+user_prompt: 'Propose new agent:
+
+
+  Performance Gaps:
+
+  {performance_gaps}
+
+
+  Existing Agents:
+
+  {existing_agents}
+
+
+  Task Distribution:
+
+  {task_distribution}
+
+
+  Provide: agent name, specialty, rationale, initial skills, training plan, success criteria, and estimated training cycles.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

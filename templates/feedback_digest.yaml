@@ -1,0 +1,39 @@
+name: feedback_digest
+description: Creates a summary digest of system performance over a period
+version: '1.0'
+model_tier: fast
+variables:
+- name: cycle_data
+  type: string
+  required: true
+  description: Raw cycle data for the period
+- name: performance_metrics
+  type: string
+  required: true
+  description: Aggregated performance metrics
+- name: period
+  type: string
+  required: true
+  description: The digest period
+system_prompt: You are a feedback digest module. Create concise, actionable summaries of system performance over a period.
+  Highlight improvements, regressions, notable patterns, and recommendations.
+user_prompt: 'Create feedback digest:
+
+
+  Cycle Data:
+
+  {cycle_data}
+
+
+  Performance Metrics:
+
+  {performance_metrics}
+
+
+  Period: {period}
+
+
+  Provide: key improvements, key regressions, notable patterns, and top 3 recommendations.'
+output_format: json
+max_tokens: 1024
+temperature: 0.0

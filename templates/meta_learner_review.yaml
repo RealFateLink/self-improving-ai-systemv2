@@ -1,0 +1,40 @@
+name: meta_learner_review
+description: Reviews strategy effectiveness over a period
+version: '1.0'
+model_tier: powerful
+variables:
+- name: strategy_history
+  type: string
+  required: true
+  description: Strategies applied and their outcomes
+- name: performance_data
+  type: string
+  required: true
+  description: Performance metrics over the period
+- name: period
+  type: string
+  required: true
+  description: The review period in cycles
+system_prompt: You are a meta-learning review module. Evaluate the effectiveness of learning strategies over a period. Determine
+  which strategies should be confirmed, which rolled back, and what new strategies to consider.
+user_prompt: 'Review strategy effectiveness:
+
+
+  Strategy History:
+
+  {strategy_history}
+
+
+  Performance Data:
+
+  {performance_data}
+
+
+  Period: {period}
+
+
+  Provide: per-strategy assessment, confirmation/rollback recommendations, new strategy suggestions, and overall learning
+  trajectory.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

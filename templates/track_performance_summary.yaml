@@ -1,0 +1,51 @@
+name: track_performance_summary
+description: Generates natural language assessment of track performance across the system
+version: '1.0'
+model_tier: balanced
+variables:
+- name: track_performances
+  type: string
+  required: true
+  description: Performance data for all active tracks
+- name: track_balance
+  type: string
+  required: true
+  description: Current track allocation and balance metrics
+- name: cross_track_insights
+  type: string
+  required: true
+  description: Recent cross-track transfer results
+- name: graduation_states
+  type: string
+  required: true
+  description: Graduation progress per track
+system_prompt: You are a performance assessment module. Create a clear, natural language summary of how the system is performing
+  across all active engineering tracks. Highlight strengths, weaknesses, balance issues, and graduation progress.
+user_prompt: 'Assess multi-track performance:
+
+
+  Track Performances:
+
+  {track_performances}
+
+
+  Track Balance:
+
+  {track_balance}
+
+
+  Cross-Track Insights:
+
+  {cross_track_insights}
+
+
+  Graduation States:
+
+  {graduation_states}
+
+
+  Provide: overall assessment, per-track highlights, balance evaluation, graduation progress, cross-domain transfer effectiveness,
+  and recommendations.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

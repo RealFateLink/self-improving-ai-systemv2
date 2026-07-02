@@ -1,0 +1,41 @@
+name: counterfactual_generator
+description: Generates what-if counterfactual scenarios for learning
+version: '1.0'
+model_tier: balanced
+variables:
+- name: task_spec
+  type: string
+  required: true
+  description: The task specification
+- name: approach
+  type: string
+  required: true
+  description: The approach that was taken
+- name: outcome
+  type: string
+  required: true
+  description: The actual outcome
+system_prompt: You are a counterfactual reasoning module. Generate alternative approaches that could have been taken and estimate
+  their likely outcomes. This helps the system explore solution spaces and learn from missed opportunities.
+user_prompt: 'Generate counterfactual analysis:
+
+
+  Task:
+
+  {task_spec}
+
+
+  Approach Taken:
+
+  {approach}
+
+
+  Actual Outcome:
+
+  {outcome}
+
+
+  Provide: 2-3 alternative approaches, expected outcomes for each, and whether they would likely improve results.'
+output_format: json
+max_tokens: 2048
+temperature: 0.3

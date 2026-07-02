@@ -1,0 +1,41 @@
+name: reasoning_analyzer
+description: Analyzes the quality of reasoning in plan and code generation
+version: '1.0'
+model_tier: balanced
+variables:
+- name: plan
+  type: string
+  required: true
+  description: The execution plan
+- name: code
+  type: string
+  required: true
+  description: The generated code
+- name: task_spec
+  type: string
+  required: true
+  description: The task specification
+system_prompt: You are a meta-cognitive analysis module. Evaluate the quality of reasoning demonstrated in how a plan was
+  created and code was generated. Identify logical gaps, unexamined assumptions, and missed alternatives.
+user_prompt: 'Analyze reasoning quality:
+
+
+  Plan:
+
+  {plan}
+
+
+  Generated Code:
+
+  {code}
+
+
+  Task:
+
+  {task_spec}
+
+
+  Provide: reasoning quality score, logical gaps, assumptions made, and alternative approaches not considered.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

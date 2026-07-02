@@ -1,0 +1,55 @@
+name: generator
+description: Generates code solutions for programming tasks
+version: '1.0'
+model_tier: powerful
+variables:
+- name: task_spec
+  type: string
+  required: true
+  description: Full task specification with tests
+- name: plan
+  type: string
+  required: true
+  description: Step-by-step execution plan
+- name: context
+  type: string
+  required: true
+  description: Relevant patterns, artifacts, and past solutions
+- name: language
+  type: string
+  required: true
+  description: Target programming language
+- name: constraints
+  type: string
+  required: true
+  description: Performance and style constraints
+system_prompt: You are an expert code generation module for a self-improving AI system. Generate clean, correct, efficient
+  code that passes all tests. Apply known patterns and prevention artifacts. Follow the plan but adapt if you identify a better
+  approach. Output ONLY the code solution.
+user_prompt: 'Generate a solution:
+
+
+  Task:
+
+  {task_spec}
+
+
+  Plan:
+
+  {plan}
+
+
+  Context & Patterns:
+
+  {context}
+
+
+  Language: {language}
+
+  Constraints: {constraints}
+
+
+  Provide the complete, working code solution.'
+output_format: code
+max_tokens: 4096
+temperature: 0.0

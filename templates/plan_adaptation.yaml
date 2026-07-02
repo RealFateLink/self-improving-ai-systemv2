@@ -1,0 +1,41 @@
+name: plan_adaptation
+description: Adapts an existing plan when execution encounters issues
+version: '1.0'
+model_tier: balanced
+variables:
+- name: original_plan
+  type: string
+  required: true
+  description: The original execution plan
+- name: current_state
+  type: string
+  required: true
+  description: Current execution state and progress
+- name: issue
+  type: string
+  required: true
+  description: The issue requiring plan adaptation
+system_prompt: You are a plan adaptation module. When an execution plan encounters issues, you analyze the situation and propose
+  minimal, targeted modifications to get back on track. Prefer small adjustments over full replans.
+user_prompt: 'Adapt the following plan:
+
+
+  Original Plan:
+
+  {original_plan}
+
+
+  Current State:
+
+  {current_state}
+
+
+  Issue Encountered:
+
+  {issue}
+
+
+  Provide: modified steps, rationale for changes, and risk assessment.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

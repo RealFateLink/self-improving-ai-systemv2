@@ -1,0 +1,50 @@
+name: optimization_brief
+description: Creates a brief for code optimization along specific dimensions
+version: '1.0'
+model_tier: balanced
+variables:
+- name: code
+  type: string
+  required: true
+  description: The code to optimize
+- name: task_spec
+  type: string
+  required: true
+  description: The task specification
+- name: current_metrics
+  type: string
+  required: true
+  description: Current performance metrics
+- name: dimensions
+  type: string
+  required: true
+  description: Which dimensions to optimize
+system_prompt: You are an optimization planning module. Analyze code and create a detailed brief for optimizing it along specified
+  dimensions (runtime, size, readability, maintainability).
+user_prompt: 'Create optimization brief:
+
+
+  Code:
+
+  {code}
+
+
+  Task:
+
+  {task_spec}
+
+
+  Current Metrics:
+
+  {current_metrics}
+
+
+  Target Dimensions:
+
+  {dimensions}
+
+
+  Provide: optimization opportunities per dimension, estimated improvements, constraints, and recommended approach.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

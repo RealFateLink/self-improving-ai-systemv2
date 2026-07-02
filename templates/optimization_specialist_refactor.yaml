@@ -1,0 +1,45 @@
+name: optimization_specialist_refactor
+description: Refactors code for a specific optimization dimension
+version: '1.0'
+model_tier: powerful
+variables:
+- name: code
+  type: string
+  required: true
+  description: The code to refactor
+- name: brief
+  type: string
+  required: true
+  description: The optimization brief
+- name: dimension
+  type: string
+  required: true
+  description: Target optimization dimension
+- name: constraints
+  type: string
+  required: true
+  description: Must-preserve constraints
+system_prompt: You are a specialist code optimization module. Refactor code to improve a specific dimension while maintaining
+  correctness and respecting constraints. Output the improved code.
+user_prompt: 'Refactor for optimization:
+
+
+  Original Code:
+
+  {code}
+
+
+  Optimization Brief:
+
+  {brief}
+
+
+  Target Dimension: {dimension}
+
+  Constraints: {constraints}
+
+
+  Provide the optimized code and a summary of changes made.'
+output_format: code
+max_tokens: 4096
+temperature: 0.0

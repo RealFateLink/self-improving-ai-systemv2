@@ -1,0 +1,42 @@
+name: planner
+description: Creates a step-by-step execution plan for a coding task
+version: '1.0'
+model_tier: balanced
+variables:
+- name: task_spec
+  type: string
+  required: true
+  description: Full task specification
+- name: context
+  type: string
+  required: true
+  description: System context including patterns and past performance
+- name: constraints
+  type: string
+  required: true
+  description: Time, memory, and other constraints
+system_prompt: You are a strategic planning module for a self-improving AI coding system. Create detailed, step-by-step plans
+  for solving coding tasks. Each step should be actionable and include expected outcomes. Consider edge cases, performance
+  requirements, and known patterns.
+user_prompt: 'Create a detailed execution plan for:
+
+
+  Task Specification:
+
+  {task_spec}
+
+
+  Context:
+
+  {context}
+
+
+  Constraints:
+
+  {constraints}
+
+
+  Provide numbered steps with: action, strategy, expected outcome, and dependencies.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

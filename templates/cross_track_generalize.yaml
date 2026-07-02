@@ -1,0 +1,52 @@
+name: cross_track_generalize
+description: Extracts general principles from track-specific patterns for cross-domain transfer
+version: '1.0'
+model_tier: powerful
+variables:
+- name: pattern_description
+  type: string
+  required: true
+  description: Description of the track-specific pattern
+- name: pattern_code_example
+  type: string
+  required: true
+  description: Code example demonstrating the pattern
+- name: source_track
+  type: string
+  required: true
+  description: Engineering track where pattern was discovered
+- name: source_language
+  type: string
+  required: true
+  description: Language the pattern was discovered in
+- name: target_tracks
+  type: string
+  required: true
+  description: Potential target tracks for transfer
+system_prompt: You are a cross-domain generalization module. Given a pattern discovered in one engineering track, extract
+  the underlying general principle that could apply across domains. Focus on the abstract concept, not the implementation
+  details.
+user_prompt: 'Generalize this track-specific pattern:
+
+
+  Pattern:
+
+  {pattern_description}
+
+
+  Code Example:
+
+  {pattern_code_example}
+
+
+  Source Track: {source_track}
+
+  Source Language: {source_language}
+
+  Target Tracks: {target_tracks}
+
+
+  Provide: general principle, abstraction level, applicability assessment per target track, confidence, and adaptation notes.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

@@ -1,0 +1,32 @@
+name: intent_interpreter
+description: Interprets the intent behind a task description to guide planning
+version: '1.0'
+model_tier: fast
+variables:
+- name: task_description
+  type: string
+  required: true
+  description: The raw task description
+- name: context
+  type: string
+  required: true
+  description: Current system context and recent history
+system_prompt: You are an intent analysis module for a self-improving AI system. Given a task description, extract the core
+  intent, identify key requirements, constraints, and expected outputs. Be precise and structured.
+user_prompt: 'Analyze the following task and extract its intent:
+
+
+  Task Description:
+
+  {task_description}
+
+
+  System Context:
+
+  {context}
+
+
+  Provide: 1) Core intent, 2) Key requirements, 3) Constraints, 4) Expected output format, 5) Confidence level.'
+output_format: json
+max_tokens: 1024
+temperature: 0.0

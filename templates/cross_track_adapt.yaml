@@ -1,0 +1,51 @@
+name: cross_track_adapt
+description: Adapts a generalized principle to a specific target track and language
+version: '1.0'
+model_tier: powerful
+variables:
+- name: general_principle
+  type: string
+  required: true
+  description: The generalized principle to adapt
+- name: target_track
+  type: string
+  required: true
+  description: Target engineering track
+- name: target_language
+  type: string
+  required: true
+  description: Target programming language
+- name: target_context
+  type: string
+  required: true
+  description: Context about the target track's conventions
+- name: example_tasks
+  type: string
+  required: true
+  description: Example tasks in the target track
+system_prompt: You are a cross-domain adaptation module. Given a generalized principle, adapt it to work effectively in a
+  specific engineering track and language. Consider the target domain's idioms, conventions, and constraints.
+user_prompt: 'Adapt this general principle to a target track:
+
+
+  General Principle:
+
+  {general_principle}
+
+
+  Target Track: {target_track}
+
+  Target Language: {target_language}
+
+  Target Context: {target_context}
+
+
+  Example Tasks:
+
+  {example_tasks}
+
+
+  Provide: adapted pattern description, implementation code, expected effectiveness, and integration notes.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

@@ -1,0 +1,59 @@
+name: task_quality_verifier
+description: Evaluates the quality of a system-generated training task
+version: '1.0'
+model_tier: balanced
+variables:
+- name: task_description
+  type: string
+  required: true
+  description: The generated task description
+- name: task_tests
+  type: string
+  required: true
+  description: The generated test suite
+- name: reference_solution
+  type: string
+  required: true
+  description: The reference solution
+- name: target_f_level
+  type: string
+  required: true
+  description: Target difficulty level
+- name: existing_tasks_sample
+  type: string
+  required: true
+  description: Sample of existing tasks for novelty comparison
+system_prompt: 'You are a task quality verification module. Evaluate whether a system-generated task meets quality standards:
+  Is it solvable? Are tests correct? Is difficulty appropriate? Is it novel? Be strict — task quality directly affects training
+  effectiveness.'
+user_prompt: 'Verify task quality:
+
+
+  Task Description:
+
+  {task_description}
+
+
+  Test Suite:
+
+  {task_tests}
+
+
+  Reference Solution:
+
+  {reference_solution}
+
+
+  Target F-Level: {target_f_level}
+
+
+  Existing Tasks Sample:
+
+  {existing_tasks_sample}
+
+
+  Provide: solvability check, test validity, difficulty appropriateness, novelty score (0.0-1.0), overall pass/fail, and any
+  failure details.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

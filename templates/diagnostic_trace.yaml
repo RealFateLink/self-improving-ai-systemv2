@@ -1,0 +1,41 @@
+name: diagnostic_trace
+description: Analyzes diagnostic traces to identify system issues
+version: '1.0'
+model_tier: fast
+variables:
+- name: trace_data
+  type: string
+  required: true
+  description: Diagnostic trace data
+- name: system_state
+  type: string
+  required: true
+  description: Current system state
+- name: issue_description
+  type: string
+  required: true
+  description: Description of the observed issue
+system_prompt: You are a diagnostic analysis module. Analyze system traces to identify the root cause of operational issues.
+  Focus on latency anomalies, error cascades, and resource bottlenecks.
+user_prompt: 'Diagnose issue:
+
+
+  Trace Data:
+
+  {trace_data}
+
+
+  System State:
+
+  {system_state}
+
+
+  Issue:
+
+  {issue_description}
+
+
+  Provide: root cause, contributing factors, severity, and recommended corrective actions.'
+output_format: json
+max_tokens: 1024
+temperature: 0.0

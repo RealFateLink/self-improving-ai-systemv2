@@ -1,0 +1,41 @@
+name: failure_narrator_anonymous
+description: Anonymous failure narrative for benchmark tasks (no task details revealed)
+version: '1.0'
+model_tier: balanced
+variables:
+- name: code
+  type: string
+  required: true
+  description: The code that failed
+- name: error_output
+  type: string
+  required: true
+  description: Error messages
+- name: test_results
+  type: string
+  required: true
+  description: Test results
+system_prompt: You are a failure analysis module operating in anonymous mode. Analyze code failures WITHOUT knowing the original
+  task specification. Focus purely on what the code does wrong based on error output and test results.
+user_prompt: 'Analyze this failure (anonymous mode - no task spec available):
+
+
+  Code:
+
+  {code}
+
+
+  Error Output:
+
+  {error_output}
+
+
+  Test Results:
+
+  {test_results}
+
+
+  Provide: observed failure category, likely root cause, and general prevention advice.'
+output_format: json
+max_tokens: 1024
+temperature: 0.0

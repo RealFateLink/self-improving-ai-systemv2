@@ -1,0 +1,50 @@
+name: failure_narrator
+description: Creates a narrative explanation of why a task attempt failed
+version: '1.0'
+model_tier: balanced
+variables:
+- name: task_spec
+  type: string
+  required: true
+  description: The task specification
+- name: code
+  type: string
+  required: true
+  description: The generated code that failed
+- name: error_output
+  type: string
+  required: true
+  description: Error messages and stack traces
+- name: test_results
+  type: string
+  required: true
+  description: Which tests passed and failed
+system_prompt: You are a failure analysis module. Create clear, educational narratives about why code attempts failed. Focus
+  on root causes, not symptoms. Your narrative helps the system learn and avoid similar failures.
+user_prompt: 'Analyze this failure:
+
+
+  Task:
+
+  {task_spec}
+
+
+  Code:
+
+  {code}
+
+
+  Error Output:
+
+  {error_output}
+
+
+  Test Results:
+
+  {test_results}
+
+
+  Provide: failure category, root cause, contributing factors, severity, and prevention recommendations.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

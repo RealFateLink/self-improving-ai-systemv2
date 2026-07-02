@@ -1,0 +1,41 @@
+name: semantic_critic
+description: Evaluates semantic correctness and completeness of code
+version: '1.0'
+model_tier: powerful
+variables:
+- name: code
+  type: string
+  required: true
+  description: The code to evaluate
+- name: task_spec
+  type: string
+  required: true
+  description: The task specification
+- name: test_results
+  type: string
+  required: true
+  description: Results from test execution
+system_prompt: You are a semantic analysis module. Evaluate whether code correctly implements the intended behavior, handles
+  all cases, and produces correct outputs. Focus on logical correctness over style.
+user_prompt: 'Evaluate semantic correctness:
+
+
+  Code:
+
+  {code}
+
+
+  Task Specification:
+
+  {task_spec}
+
+
+  Test Results:
+
+  {test_results}
+
+
+  Provide: correctness score, completeness score, elegance score, issues, and suggestions.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

@@ -1,0 +1,32 @@
+name: root_cause_chain
+description: Builds a chain of root causes from failure history
+version: '1.0'
+model_tier: balanced
+variables:
+- name: failure_history
+  type: string
+  required: true
+  description: Recent failure narratives and patterns
+- name: current_failure
+  type: string
+  required: true
+  description: The most recent failure to chain
+system_prompt: You are a root cause chaining module. Analyze failure patterns across multiple attempts to identify deep, systemic
+  root causes. Look for recurring themes and cascading failure chains.
+user_prompt: 'Build root cause chain:
+
+
+  Failure History:
+
+  {failure_history}
+
+
+  Current Failure:
+
+  {current_failure}
+
+
+  Provide: cause chain (deepest to shallowest), chain depth, confidence, primary category, and recommended interventions.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

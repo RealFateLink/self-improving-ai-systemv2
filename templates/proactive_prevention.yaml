@@ -1,0 +1,41 @@
+name: proactive_prevention
+description: Generates prevention artifacts from failure patterns
+version: '1.0'
+model_tier: balanced
+variables:
+- name: failure_chain
+  type: string
+  required: true
+  description: The failure chain to prevent
+- name: pattern_data
+  type: string
+  required: true
+  description: Related pattern information
+- name: task_context
+  type: string
+  required: true
+  description: Types of tasks where this occurs
+system_prompt: You are a proactive prevention module. Generate guard clauses, input checks, and other prevention artifacts
+  that can be injected into future code generation to prevent known failure patterns.
+user_prompt: 'Generate prevention artifacts:
+
+
+  Failure Chain:
+
+  {failure_chain}
+
+
+  Related Patterns:
+
+  {pattern_data}
+
+
+  Task Context:
+
+  {task_context}
+
+
+  Provide: artifact type, description, code content, applicable task types, and expected effectiveness.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

@@ -1,0 +1,39 @@
+name: static_reviewer
+description: Performs static analysis review of generated code
+version: '1.0'
+model_tier: balanced
+variables:
+- name: code
+  type: string
+  required: true
+  description: The generated code to review
+- name: task_spec
+  type: string
+  required: true
+  description: The task specification
+- name: language
+  type: string
+  required: true
+  description: Programming language
+system_prompt: You are a static code review module. Analyze code for correctness, style, potential bugs, edge cases, and adherence
+  to best practices. Be thorough but avoid false positives.
+user_prompt: 'Review the following code:
+
+
+  Language: {language}
+
+
+  Code:
+
+  {code}
+
+
+  Task Specification:
+
+  {task_spec}
+
+
+  Provide: verdict (PASS/FAIL/PARTIAL_PASS), issues found, warnings, and overall score (0.0-1.0).'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

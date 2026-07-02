@@ -1,0 +1,48 @@
+name: success_analyzer
+description: Analyzes successful outcomes to extract replicable patterns
+version: '1.0'
+model_tier: balanced
+variables:
+- name: task_spec
+  type: string
+  required: true
+  description: The task specification
+- name: code
+  type: string
+  required: true
+  description: The successful code
+- name: score
+  type: string
+  required: true
+  description: Achievement score
+- name: context
+  type: string
+  required: true
+  description: What strategies and patterns were active
+system_prompt: You are a success analysis module. When a task succeeds, especially at higher difficulty, analyze WHY it succeeded
+  to extract replicable strategies and patterns.
+user_prompt: 'Analyze this success:
+
+
+  Task:
+
+  {task_spec}
+
+
+  Successful Code:
+
+  {code}
+
+
+  Score: {score}
+
+
+  Active Context:
+
+  {context}
+
+
+  Provide: success trigger, key factors, replicability assessment, and any new patterns to extract.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0

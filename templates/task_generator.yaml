@@ -1,0 +1,52 @@
+name: task_generator
+description: Generates new training tasks for a specific domain and level
+version: '1.0'
+model_tier: powerful
+variables:
+- name: domain
+  type: string
+  required: true
+  description: Target domain
+- name: level
+  type: string
+  required: true
+  description: Target F-level
+- name: language
+  type: string
+  required: true
+  description: Target language
+- name: existing_tasks
+  type: string
+  required: true
+  description: Sample of existing tasks to avoid duplication
+- name: gaps
+  type: string
+  required: true
+  description: Identified skill gaps to target
+system_prompt: 'You are a task generation module. Generate novel, well-crafted programming tasks that test specific skills
+  at a target difficulty level. Tasks must include: clear description, comprehensive test suite, and a reference solution.
+  Ensure tasks are genuinely novel and not near-duplicates of existing ones.'
+user_prompt: 'Generate a training task:
+
+
+  Domain: {domain}
+
+  Level: {level}
+
+  Language: {language}
+
+
+  Existing Tasks (avoid duplicates):
+
+  {existing_tasks}
+
+
+  Skill Gaps to Target:
+
+  {gaps}
+
+
+  Provide: title, description, test code, reference solution, and metadata (difficulty rating, estimated solve time, tags).'
+output_format: json
+max_tokens: 4096
+temperature: 0.3

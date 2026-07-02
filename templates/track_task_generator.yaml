@@ -1,0 +1,61 @@
+name: track_task_generator
+description: Generates new training tasks for a specific engineering track at a target F-level
+version: '1.0'
+model_tier: powerful
+variables:
+- name: track_id
+  type: string
+  required: true
+  description: Target engineering track
+- name: f_level
+  type: string
+  required: true
+  description: Target difficulty F-level
+- name: language
+  type: string
+  required: true
+  description: Target programming language
+- name: existing_task_samples
+  type: string
+  required: true
+  description: Samples of existing tasks to avoid duplication
+- name: skill_gaps
+  type: string
+  required: true
+  description: Identified skill gaps in this track
+- name: avoid_duplicates
+  type: string
+  required: true
+  description: Specific patterns/problems to avoid
+system_prompt: You are a track-specific task generation module. Generate novel, high-quality programming tasks tailored to
+  a specific engineering track. Tasks must be genuinely novel (not near-duplicates), appropriately difficult, and target identified
+  skill gaps. Include comprehensive tests and a verified reference solution.
+user_prompt: 'Generate a track-specific training task:
+
+
+  Track: {track_id}
+
+  F-Level: {f_level}
+
+  Language: {language}
+
+
+  Existing Tasks (avoid duplicates):
+
+  {existing_task_samples}
+
+
+  Skill Gaps to Target:
+
+  {skill_gaps}
+
+
+  Avoid These Patterns:
+
+  {avoid_duplicates}
+
+
+  Provide: title, description, test code, reference solution, metadata, and novelty justification.'
+output_format: json
+max_tokens: 4096
+temperature: 0.3

@@ -1,0 +1,32 @@
+name: code_smell_detector
+description: Detects code smells and anti-patterns
+version: '1.0'
+model_tier: fast
+variables:
+- name: code
+  type: string
+  required: true
+  description: The code to analyze
+- name: function_list
+  type: string
+  required: true
+  description: List of functions in the code
+system_prompt: You are a code quality module specializing in detecting code smells and anti-patterns. Identify structural
+  issues that may indicate deeper design problems.
+user_prompt: 'Detect code smells in:
+
+
+  Code:
+
+  {code}
+
+
+  Functions:
+
+  {function_list}
+
+
+  For each smell found, provide: type, severity (S1-S4), location, description, and suggestion.'
+output_format: json
+max_tokens: 2048
+temperature: 0.0
