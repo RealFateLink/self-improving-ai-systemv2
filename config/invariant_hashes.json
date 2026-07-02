@@ -1,0 +1,40 @@
+{
+  "version": "0.1.0",
+  "invariants": {
+    "INV-001": {
+      "description": "Budget never exceeds monthly limit",
+      "hash": "placeholder_hash_001",
+      "check_frequency": "every_cycle"
+    },
+    "INV-002": {
+      "description": "Graduation state only advances, never regresses",
+      "hash": "placeholder_hash_002",
+      "check_frequency": "on_gate_evaluation"
+    },
+    "INV-003": {
+      "description": "Protected tables cannot be modified outside allowed columns",
+      "hash": "placeholder_hash_003",
+      "check_frequency": "every_write"
+    },
+    "INV-004": {
+      "description": "Sandbox execution cannot access filesystem or network",
+      "hash": "placeholder_hash_004",
+      "check_frequency": "every_cycle"
+    },
+    "INV-005": {
+      "description": "Agent lifecycle transitions follow valid state machine",
+      "hash": "placeholder_hash_005",
+      "check_frequency": "every_cycle"
+    },
+    "INV-006": {
+      "description": "Track state transitions follow valid state machine",
+      "hash": "placeholder_hash_006",
+      "check_frequency": "every_cycle"
+    },
+    "INV-007": {
+      "description": "Deactivation always requires human approval",
+      "hash": "placeholder_hash_007",
+      "check_frequency": "every_write"
+    }
+  }
+}

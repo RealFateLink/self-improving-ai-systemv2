@@ -1,0 +1,141 @@
+# Protected table parameters — controls what operations are allowed on each table.
+# Protection levels:
+#   PROTECTED:          No modifications after initial seed (append-only once seeded)
+#   RESTRICTED_UPDATE:  Only specific columns can be updated
+#   APPEND_ONLY:        New rows only, no updates or deletes
+#   HUMAN_ONLY:         Only human operators can modify
+
+tables:
+
+  # ===========================================================================
+  # === Core tables (original) ===
+  # ===========================================================================
+
+  task_metadata:
+    protection: PROTECTED
+    description: "Task definitions are immutable once created"
+
+  graduation_state:
+    protection: RESTRICTED_UPDATE
+    allowed_update_columns:
+      - current_gate
+      - consecutive_sessions
+      - exam_pass_rate
+      - last_gate_completed
+      - last_gate_completed_at_cycle
+      - total_gate_attempts
+      - history
+    description: "Graduation state updates only through graduation protocol"
+
+  benchmark_definitions:
+    protection: PROTECTED
+    description: "Benchmark definitions are immutable"
+
+  benchmark_results:
+    protection: APPEND_ONLY
+    description: "Benchmark results are immutable audit trail"
+
+  protected_params:
+    protection: HUMAN_ONLY
+    description: "Only humans can modify protection rules"
+
+  invariant_checks:
+    protection: PROTECTED
+    description: "Invariant definitions are immutable"
+
+  config_snapshots:
+    protection: APPEND_ONLY
+    description: "Config history is immutable"
+
+  approval_history:
+    protection: APPEND_ONLY
+    description: "Approval decisions are permanent record"
+
+  system_events:
+    protection: APPEND_ONLY
+    description: "Event log is append-only"
+
+  # ===========================================================================
+  # === Multi-Track tables (Section 8.5) ===
+  # ===========================================================================
+
+  track_definition:
+    protection: PROTECTED
+    description: "Append-only once seeded; track definitions are immutable"
+
+  track_performance:
+    protection: RESTRICTED_UPDATE
+    allowed_update_columns:
+      - total_cycles
+      - pass_rate_overall
+      - pass_rate_rolling_100
+      - pass_rate_rolling_500
+      - current_f_level_mode
+      - current_tier
+      - avg_cost_per_cycle
+      - cross_domain_knowledge_generated
+      - trend
+      - stagnation_cycles
+      - consecutive_crashes
+      - warmup_remaining
+      - health_score
+      - paused_at_cycle
+      - updated_at
+    description: "Performance metrics update only through tracker protocol"
+
+  track_graduation_state:
+    protection: RESTRICTED_UPDATE
+    allowed_update_columns:
+      - consecutive_sessions
+      - exam_cycles_completed
+      - exam_pass_rate
+      - attempt_start_cycle
+      - previous_attempts
+      - best_streak
+      - completed_at
+      - updated_at
+    description: "Graduation progress updates through graduation protocol"
+
+  track_schedule_log:
+    protection: APPEND_ONLY
+    description: "Scheduling decisions are immutable audit trail"
+
+  cross_track_insights:
+    protection: RESTRICTED_UPDATE
+    allowed_update_columns:
+      - attempted
+      - outcome
+      - effectiveness_in_target
+      - generalization_quality
+    description: "Outcome fields updatable after transfer attempt"
+
+  track_allocation_history:
+    protection: APPEND_ONLY
+    description: "Allocation changes are immutable audit trail"
+
+  graduation_ceiling_flags:
+    protection: RESTRICTED_UPDATE
+    allowed_update_columns:
+      - reviewed
+      - review_outcome
+    description: "Only review fields updatable by human"
+
+  graduation_overrides:
+    protection: APPEND_ONLY
+    description: "Override records are permanent"
+
+  task_generation_log:
+    protection: APPEND_ONLY
+    description: "Generation audit trail is immutable"
+
+  task_generation_capability:
+    protection: RESTRICTED_UPDATE
+    allowed_update_columns:
+      - enabled
+      - total_generated
+      - total_accepted
+      - acceptance_rate
+      - privilege_revoked_at_cycle
+      - reinstatement_requested
+      - updated_at
+    description: "Capability state updates through generation protocol"
